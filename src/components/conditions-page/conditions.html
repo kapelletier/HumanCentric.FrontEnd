@@ -1,0 +1,84 @@
+<div class="flex-item v-flex">
+    <div class="flex-item h-flex">
+        <div id="nav-tree-container" class="flex-item v-flex well well-lg flex-25-percent" >
+            <div id="nav-tree">
+                <div class="tree-item tree-item-large" data-bind="with: WholeMishpucha">
+                    <div data-bind="click: $parent.SelectTreeItem, css: { ItemSelected: IsSelected() == true}">
+                        <div style="display:inline-block;min-width:14px;"></div> <span class="glyphicon glyphicon-asterisk"></span> <span data-bind="text: DisplayName"></span>
+                    </div>
+                </div>
+
+                <!--The constituent tree-->
+                <div data-bind="click: ToggleConstituents" class="tree-header">
+                   <span data-bind="visible: HasConstituents, css: ExpandedConsituentsClass" style="font-size:12px;"></span> <span class="glyphicon glyphicon-user"></span> <span>Constituents</span>
+                </div>
+                <div data-bind="visible: ConstituentsVisible, template: { name: 'nav-item', foreach: Constituents }" class="tree-item-container"></div>
+
+                <!--The Service Context tree-->
+                <div data-bind="click: ToggleService" class="tree-header">
+                    <span data-bind="css: ExpandedServicesClass" style="font-size:12px;"></span> <span class="glyphicon glyphicon-user"></span> <span>Service Contexts</span>
+                </div>
+                <div data-bind="visible: ServicesVisible, template: { name: 'nav-item', foreach: ServiceContexts }" class="tree-item-container"></div>
+
+                <!--The Tags tree-->
+                <div data-bind="click: ToggleTags" class="tree-header">
+                    <span data-bind="visible: HasTags, css: ExpandedTagsClass" style="font-size:12px;"></span> <span class="glyphicon glyphicon-tags"></span> <span>Tags</span>
+                </div>
+                <div data-bind="visible: TagsVisible, template: { name: 'nav-item', foreach: Tags }" class="tree-item-container"></div>
+
+
+            </div>
+        </div>
+        <div class="h-flex-gutter"></div>
+        <div class="flex-item v-flex flex-75-percent">
+            <div class="flex-item-auto">
+                <div class="flex-item-auto">
+                    <div class="h-flex h-flex-right TitleBar">
+                        <div class="flex-item">
+                            <h2>Conditions</h2>
+                        </div>
+                        <div class="flex-item-right">
+                           <button class = "btn btn-primary btn-sm" role = "button" target = "_blank"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-item">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Affects</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="template: { name: 'condition-table-item', foreach: Conditions }"></tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="nav-item">
+    <div data-bind="css: { ItemSelected: IsSelected() == true}" class="tree-item">
+        <a data-bind="click: $parent.SelectTreeItem"><span data-bind="text: DisplayName"></span></a>
+    </div>
+
+</script>
+
+<script type="text/html" id="condition-table-item">
+    <tr>
+        <td>
+            <a data-bind="attr: {href: Url}" target="_blank"><span data-bind="text: ConditionName"></span></a>
+        </td>
+        <td>
+           
+        </td>
+        <td></td>
+        <td>
+           
+        </td>
+    </tr>
+</script>

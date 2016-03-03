@@ -1,0 +1,27 @@
+{
+  "name": "tester",
+  "authors": [
+    "kapelletier <keith@keithpelletier.com>"
+  ],
+  "description": "a test",
+  "main": "main",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "index",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "requirejs": "^2.1.22",
+    "text": "requirejs-text#^2.0.14",
+    "knockout": "^3.4.0",
+    "crossroads": "^0.12.2",
+    "hasher": "^1.2.0"
+  }
+}
