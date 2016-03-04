@@ -10,7 +10,7 @@ require(['jquery', 'bootstrap', 'knockout', 'router'], function(jq, boot, ko, ro
 
     ko.components.register('conditions-page', { require: 'components/conditions-page/conditions' });
     ko.components.register('constituents-page', { require: 'components/constituents-page/constituents' });
-    ko.components.register('offerings-page', { require: 'components/offeringss-page/offerings' });
+    ko.components.register('offerings-page', { require: 'components/offerings-page/offerings' });
 
     // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 

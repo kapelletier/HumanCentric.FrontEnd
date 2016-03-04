@@ -1,0 +1,216 @@
+<div class="flex-item v-flex" style="overflow:auto;">
+
+    <div class="h-flex flex-item-auto" style="margin-top:20px;">
+        <div class="form-group flex-item">
+            <label for="conditionNameInput">Name</label>
+            <input type="text" class="form-control input-lg" id="constituentNameInput" data-bind="textinput : ConstituentName" placeholder="Enter the name of the Persona">
+        </div>
+        <div class="h-flex-gutter"></div>
+        <div class="h-flex flex-item">
+            <div class="form-group  flex-item">
+                <label for="conditionTypeSelect">Value Perspective</label>
+                <select class="form-control select-lrg"
+                        data-bind="options: AvailableValueOrientations,
+                               optionsText: 'Name',
+                               value: SelectedOrientation,
+                               optionsCaption: 'Choose...'"></select>
+            </div>
+            <div class="h-flex-gutter"></div>
+            <div class="form-group  flex-item">
+                <label for="conditionNameInput">Population</label>
+                <input type="text" class="form-control input-lg" id="constituentSize" data-bind="textinput : ConstituentSize" placeholder="Enter the number of people">
+               
+            </div>
+        </div>
+    </div>
+    <div class="h-flex flex-item">
+        <div class="flex-item v-flex">
+            <div class="flex-item-auto h-flex h-flex-right">
+                <label class="flex-item"><span class="glyphicon glyphicon-ok-circle"></span> Characteristics</label>
+                <div class="flex-item-auto">
+                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#AvaiCharsModal" data-bind="click : AddCharacteristic">Add Characteristic</button>
+                </div>
+            </div>
+            <ul class="flex-item simple-list-box list-group list-group-no-margin" data-bind="template: { name: 'characteristic-item-template', foreach: CharacteristicCollection }"></ul>
+        </div>
+        <div class="h-flex-gutter"></div>
+        <div class="flex-item v-flex">
+            <div class="flex-item-auto h-flex h-flex-right">
+                <label class="flex-item"><span class="glyphicon glyphicon-road"></span> Conditions</label>
+                <div class="flex-item-auto">
+                    <button class="btn btn-default btn-sm" data-bind="click : CreateCondition" data-toggle="modal" data-target="#ConditionModal">Add Condition</button>
+                </div>
+            </div>
+            <ul class="flex-item simple-list-box list-group list-group-no-margin" data-bind="template: { name: 'condition-item-template', foreach: ConditionCollection }"></ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add Condition Modal -->
+<div class="modal fade" id="ConditionModal" tabindex="-1" role="dialog" data-bind="with : CurrentCondition" aria-labelledby="ConditionModalModelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="ConditionModalModelLabel">Add Condition</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="conditionName">Conditon Name</label>
+                    <input class="form-control input-lg" id="conditionName" data-bind="value : ConditionName" placeholder="Enter the name of this Condition">
+                </div>
+                <div class="form-group">
+                    <label for="conditionName">Conditon Type</label>
+                    <select class="form-control select-lrg"
+                            data-bind="options: AvailableConditionTypes,
+                               optionsText: 'ConditionTypeName',
+                               value: SelectedConditionType,
+                               optionsCaption: 'Choose...'"></select>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" data-bind="value : ConditionDescription" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Evidence</label>
+                    <ul class="simple-list-box list-group list-group-no-margin" style="min-height:150px" data-bind="template: { name: 'evidence-item-template', foreach: EvidenceCollection }"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click : $parent.AddOrUpdateCondition">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Select Characteristics Modal -->
+<div class="modal fade" id="AvaiCharsModal" tabindex="-1" role="dialog" aria-labelledby="AvaiCharsModallModelLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="AvaiCharsModalModelLabel">Add Characteristic</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Select Characteristics
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <div style="margin-bottom:8px;">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click : UpdateSelectedCharacteristics">Add Selected</button>
+                                </div>
+                                <ul class="simple-list-box list-group list-group-no-margin" style="min-height:150px;max-height:300px;overflow:auto;" data-bind="template: { name: 'avail-char-item-template', foreach: AvailableCharacteristics }"></ul>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Create Characteristic
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body" data-bind="with: BlankCharacteristic">
+                                <div class="form-group">
+                                    <label for="conditionName">Characterisctic Name</label>
+                                    <input class="form-control input-lg" data-bind="value : CharacteristicName" placeholder="Enter the name of this Characteristic">
+                                </div>
+                                <div class="form-group">
+                                    <label for="conditionName">Category</label>
+                                    <select class="form-control select-lrg"
+                                            data-bind="options: $parent.AvailableCharacteristicCategories,
+                                           optionsText: 'CategoryName',
+                                           value: SelectedCategory,
+                                           optionsCaption: 'Choose...'"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="conditionName">Description</label>
+                                    <textarea class="form-control" data-bind="value : Description" rows="3"></textarea>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click : $parent.AddUpdateSelectedCharacteristics">Create and Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="constituent-template">
+    <li class="list-group-item">
+        <input type="checkbox" data-bind="checked : IsSelected"> <span data-bind="text: ConstituentName"></span>
+    </li>
+</script>
+
+<script type="text/html" id="avail-char-item-template">
+    <li class="list-group-item">
+        <input type="checkbox" data-bind="checked : IsSelected"> <span data-bind="text: CharacteristicName"></span>
+    </li>
+</script>
+
+<script type="text/html" id="constituent-item-template">
+    <li class="list-group-item">
+        <div class="h-flex h-flex-right">
+            <div class="flex-item">
+                <h5 data-bind="text: ConstituentName"></h5>
+                <p>
+                    <span></span>
+                </p>
+            </div>
+            <div class="flex-item flex-item-right">
+                <button class="btn btn-sm btn-default" data-bind="click : $parent.RemoveConstituent"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+            </div>
+        </div>
+    </li>
+</script>
+
+<script type="text/html" id="condition-item-template">
+    <li class="list-group-item">
+        <div class="h-flex h-flex-right">
+            <div class="flex-item">
+                <a href="#" data-bind="click : $parent.EditCondition"><h4 data-bind="text: ConditionName"></h4></a>
+                <p>
+                    <span data-bind="text: ConditionDescription"></span>
+                </p>
+            </div>
+            <div class="flex-item flex-item-right">
+                <button class="btn btn-sm btn-default" data-bind="click : $parent.RemoveCondition"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+            </div>
+        </div>
+    </li>
+</script>
+
+<script type="text/html" id="characteristic-item-template">
+    <li class="list-group-item">
+        <div class="h-flex h-flex-right">
+            <div class="flex-item">
+                <h5 data-bind="text: CharacteristicName"></h5>
+                <p>
+                    <span></span>
+                </p>
+            </div>
+            <div class="flex-item flex-item-right">
+                <button class="btn btn-sm btn-default" data-bind="click : $parent.RemoveCharacteristic"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+            </div>
+        </div>
+    </li>
+</script>

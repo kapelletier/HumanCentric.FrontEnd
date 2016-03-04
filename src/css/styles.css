@@ -664,7 +664,7 @@ a.tree-item .selected {
    display:block;
 }
 
-#tabitems .tab-item.TabItemSelected
+.navigation-active
 {
    border-radius:6px 6px 0px 0px;
    border: 1px solid #ccc;

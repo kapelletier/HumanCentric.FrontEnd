@@ -2,21 +2,23 @@
   "name": "humancentric",
   "version": "0.0.0",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-requirejs-bundler": "^0.1.1",
-    "gulp-concat": "~2.2.0",
-    "gulp-clean": "~0.2.4",
+    "chalk": "~0.4.0",
+    "deeply": "~0.1.0",
     "event-stream": "~3.1.0",
-    "gulp-replace": "~0.2.0",
-    "gulp-uglify": "~0.2.1",
-    "gulp-html-replace": "~1.0.0",
+    "gulp": "^3.9.1",
     "gulp-babel": "^5.2.1",
+    "gulp-clean": "~0.2.4",
+    "gulp-concat": "~2.2.0",
     "gulp-connect": "^2.2.0",
     "gulp-filter": "^3.0.1",
+    "gulp-html-replace": "~1.0.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-replace": "~0.2.0",
+    "gulp-requirejs-bundler": "^0.1.1",
+    "gulp-uglify": "~0.2.1",
+    "jshint": "^2.9.1",
     "object-assign": "^4.0.1",
-    "requirejs": "^2.1.11",
-    "deeply": "~0.1.0",
-    "chalk": "~0.4.0"
+    "requirejs": "^2.1.11"
   },
   "dependencies": {
     "slash": "^1.0.0"

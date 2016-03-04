@@ -5,7 +5,7 @@ var fs = require('fs'), vm = require('vm'), merge = require('deeply'), chalk = r
 //
 var gulp = require('gulp'), rjs = require('gulp-requirejs-bundler'), concat = require('gulp-concat'), clean = require('gulp-clean'), filter = require('gulp-filter'),
     replace = require('gulp-replace'), uglify = require('gulp-uglify'), htmlreplace = require('gulp-html-replace'),
-    connect = require('gulp-connect'),  objectAssign = require('object-assign');
+    connect = require('gulp-connect'),  objectAssign = require('object-assign'), jshint = require('gulp-jshint');
 
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;'),
@@ -68,6 +68,12 @@ gulp.task('html', function() {
             'js': 'scripts.js'
         }))
         .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('lint', function() {
+   return gulp.src('./src/components/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default')); 
 });
 
 // Removes all files from ./dist/
